@@ -10,6 +10,12 @@ window.onload = (event) => {
         splashScreen.style.display = "none";
 
         var game = new Game(canvas);
-        window.requestAnimationFrame(game.start.bind(game));
+        
+        function update (time){
+            game.update(time)
+            window.requestAnimationFrame(update)
+        };
+        
+        window.requestAnimationFrame(update)
     })
 }

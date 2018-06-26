@@ -7,6 +7,8 @@ function Fireball (game, x, y, direction) {
     this.sY = 0;
 
     this.radius = 8;
+    this.width = this.radius*2;
+    this.height = this.radius*2;
     this.direction = direction;
 
     this.up = -150;
@@ -57,7 +59,6 @@ Fireball.prototype.draw = function(color) {
 }
 
 Fireball.prototype.move = function(delta) {
-    // console.log(this.x +" - "+this.y);
     this.x += this.sX * delta/1000;
     this.y += this.sY * delta/1000;
 }
@@ -68,5 +69,50 @@ Fireball.prototype.checkOutRange = function() {
     }
     if(this.y < 0 || this.y > window.innerHeight){
         return true;
+    }
+}
+
+Fireball.prototype.checkCollisions = function(origin){
+    if(origin == "player"){
+        this.checkCollisionsEnemies();
+    } else {
+        this.checkCollisionsPlayer();
+    }
+}
+
+Fireball.prototype.checkCollisionsEnemies = function(){
+    var enemies = this.game.enemies;
+
+    for(var i = 0; i < enemies.length; i++){
+        if (this.x < enemies[i].x + enemies[i].width && this.x + this.width > enemies[i].x &&
+            this.y < enemies[i].y + enemies[i].height && this.height + this.y > enemies[i].y) {
+            
+            if(enemies[i].life == 0){
+                clearInterval(enemies[i].interval); // Stop Pulses
+                enemies[i].img.src = ""; // Delete IMG
+            } else {
+                enemies[i].life--; 
+            }
+
+            // Delete fireball
+            this.x = -10;
+            this.y = -10;
+        }
+    }     
+}
+
+Fireball.prototype.checkCollisionsPlayer = function(){
+    var player = this.game.player;
+
+    if (this.x < player.x + player.width && this.x + this.width > player.x &&
+        this.y < player.y + player.height && this.height + this.y > player.y) {
+        
+        // Delete fireball
+        this.x = -10;
+        this.y = -10;
+
+        this.game.player.life--;
+        console.log(this.game.player.life)
+        if(this.game.player.life == 0) this.game.gameOver();
     }
 }

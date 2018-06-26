@@ -1,9 +1,9 @@
-function Enemy(game, week){
+function Enemy(game){
     this.game = game;
-    this.week = week;
+    this.week = this.game.level;
     this.life = 10;
 
-    this.x = 100;
+    this.x = Math.floor(Math.random() * ((window.innerWidth-200) - 200)) + 200;
     this.y = 100;
     this.speedX = this.getRandomSpeed();
     this.speedY = this.getRandomSpeed();
@@ -11,21 +11,24 @@ function Enemy(game, week){
     this.pulseArr = [];
 
     this.img = new Image();
-    this.img.src = "images/enemies/html.png";
+    this.img.src = "images/enemies/"+this.getRandomEnemy();
+    
+    this.width = 50;
+    this.img.onload = () => this.height = (this.width / this.img.width) * this.img.height;
 
     this.pulseTiming = 700;
-    setInterval(this.createPulse.bind(this), this.pulseTiming);
+    this.interval = setInterval(this.createPulse.bind(this), this.pulseTiming);
 }
 
 Enemy.prototype.getRandomSpeed = function() {
-    return Math.floor(Math.random() * (100)) - 100;
+    return Math.floor(Math.random() * (100) - 40);
 }
 
 Enemy.prototype.getRandomEnemy = function(){
     var enemies = [
-        ["prework.png", "ironhack.png"],
+        ["rover.png", "npm.png"],
         ["html.png", "css.png", "js.png"],
-        ["bootstrap.png", "jquey.png", "lodash.png", "car.gif", "flappy.png"],
+        ["bootstrap.png", "jquery.png", "lodash.png", "flappy.png"],
         ["codewars.png"],
         ["node.png", "mongo.png", "express.png", "es6.png"],
         ["node.png", "passport.png", "googlemaps.png", "ajax.png", "nodemailer.png", "heroku.png"],
@@ -40,9 +43,6 @@ Enemy.prototype.getRandomEnemy = function(){
 }
 
 Enemy.prototype.draw = function() {
-    this.width = 70;
-    this.height = this.width * this.img.width / this.img.height;
-
     this.game.ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     
     for(p of this.pulseArr){
@@ -58,7 +58,8 @@ Enemy.prototype.move = function(delta) {
 
     for(p of this.pulseArr){
         p.expand(this.game.delta);
-    }  
+        this.clearEmptyPulses();
+    }
 }
 
 Enemy.prototype.bounceInLimits = function() {
@@ -71,20 +72,17 @@ Enemy.prototype.bounceInLimits = function() {
 }
 
 Enemy.prototype.createPulse = function() {
-    this.clearEmptyPulses();
-    
     var pulseX = this.x+(this.width/2) - 10;
     var pulseY = this.y+(this.height/2) + 10;
     
     var pulse = new Pulse(this.game, pulseX, pulseY, "enemy");
     this.pulseArr.push(pulse);
-    console.log(this.pulseArr)
 }
 
 Enemy.prototype.clearEmptyPulses = function() {
     for(var i = 0; i < this.pulseArr.length; i++){
         if(this.pulseArr[i].fireballs.length == 0){
-        this.pulseArr.splice(i, 1);
+            this.pulseArr.splice(i, 1);
         }
     }
 }

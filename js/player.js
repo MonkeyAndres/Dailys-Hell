@@ -1,12 +1,12 @@
 function Player(game) {
   this.game = game;
-  this.life = 20;
+  this.life = 10;
 
   this.width = 50;
   this.height = 50;
 
   this.x = window.innerWidth / 2 - this.width;
-  this.y = window.innerHeight / 2 - this.height;
+  this.y = window.innerHeight - this.height - 100;
 
   this.sX = 0;
   this.sY = 0;
@@ -17,7 +17,7 @@ function Player(game) {
   this.setListeners(this);
 
   this.pulseArr = [];
-  this.pulseTiming = 300
+  this.pulseTiming = 400
   setInterval(this.pulseAttack.bind(this), this.pulseTiming);
 }
 

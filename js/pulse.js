@@ -37,6 +37,8 @@ Pulse.prototype.draw = function() {
 Pulse.prototype.expand = function(delta) {
     for(var i = 0; i < this.fireballs.length; i++){
         this.fireballs[i].move(delta);
+        this.fireballs[i].checkCollisions(this.origin);
+
         if(this.fireballs[i].checkOutRange()){
             this.fireballs.splice(i, 1);
         }
