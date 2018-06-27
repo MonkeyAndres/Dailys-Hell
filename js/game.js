@@ -1,19 +1,18 @@
-function Game(canvas){
+function Game(canvas, difficulty){
     this.canvas = canvas;
     this.ctx = this.canvas.getContext("2d");
     
     this.levels = levels;
-    this.difficulty = 1;
+    this.difficultyParams = difficultyLevels[difficulty];
 
     this.startStatus();
 }
 
 /**
  * TODO
- * Edit levels, add diferent lifes
- * Different difficulties?
+ * Difficulties Speed Pulse
+ * Enemies life indicator
  * Music and Fancy stuff
- * Game over fix?
  */
 
 Game.prototype.update = function(time) {
@@ -65,7 +64,7 @@ Game.prototype.moveAll = function() {
 
 Game.prototype.createEnemies = function(n) {
     for(var i = 0; i < n; i++){
-        var life = getEnemyLife(this.difficulty);
+        var life = getEnemyLife(this.difficultyParams);
         this.enemies.push(new Enemy(this, life));
     }
     this.enemyCounter = n;
@@ -112,9 +111,13 @@ Game.prototype.setLevel = function() {
     
     this.printText(level.title);
     this.createEnemies(level.enemies);
+
+    var playerLife = this.difficultyParams.playerLife; // Get life
     
-    var playerLife = difficultyLevels[this.difficulty].playerLife;
-    this.player = new Player(this, playerLife);
+    if(this.difficultyParams.noHeal && this.level != 0){ // No Heal Mode
+        playerLife = this.player.life;
+    } 
+    this.player = new Player(this, playerLife); 
     
 
     setTimeout(() => {this.pause = false}, 2000);

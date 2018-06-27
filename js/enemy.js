@@ -28,14 +28,14 @@ Enemy.prototype.getRandomEnemy = function(){
     var enemies = [
         ["rover.png", "npm.png"],
         ["html.png", "css.png", "js.png"],
-        ["bootstrap.png", "jquery.png", "lodash.png", "flappy.png"],
+        ["bootstrap.png", "jquery.png", "sass.png", "flappy.png"],
         ["codewars.png"],
         ["node.png", "mongo.png", "express.png", "es6.png"],
-        ["node.png", "passport.png", "googlemaps.png", "ajax.png", "nodemailer.png", "heroku.png"],
-        ["codewars.png"],
+        ["passport.png", "googlemaps.png", "ajax.png", "nodemailer.png", "heroku.png"],
+        ["codewars.png", "lodash.png", "git.png"],
         ["typescript.png", "angular.png", "apirest.png"],
         ["codewars.png", "trello.png"],
-        ["gabi.png", "beltran.png", "juan.png", "susana.png"],
+        ["gabi.png", "beltran.png", "juan.png", "susana.png"]
     ]
 
     var randomEnemy = Math.floor(Math.random() * (enemies[this.week].length));

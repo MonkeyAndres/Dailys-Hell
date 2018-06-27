@@ -12,14 +12,16 @@ var levels = [
 ]
 
 var difficultyLevels = [
-    {'minEnemiesLife': 5, 'maxEnemiesLife': 10, 'playerLife': 50},
-    {'minEnemiesLife': 10, 'maxEnemiesLife': 15, 'playerLife': 20},
-    {'minEnemiesLife': 15, 'maxEnemiesLife': 20, 'playerLife': 20},
+    {'minEnemiesLife': 5, 'maxEnemiesLife': 10, 'playerLife': 50}, // Hard 
+    {'minEnemiesLife': 10, 'maxEnemiesLife': 15, 'playerLife': 20}, // Very Hard
+    {'minEnemiesLife': 15, 'maxEnemiesLife': 20, 'playerLife': 20}, // 1vs1
+    {'minEnemiesLife': 15, 'maxEnemiesLife': 20, 'playerLife': 20, 'noHeal': true}, // Hardcore
+    {'minEnemiesLife': 10, 'maxEnemiesLife': 20, 'playerLife': 99999}, // God
 ]
 
-function getEnemyLife(index) {
-    var minLife = difficultyLevels[index].minEnemiesLife;
-    var maxLife = difficultyLevels[index].maxEnemiesLife;
+function getEnemyLife(params) {
+    var minLife = params.minEnemiesLife;
+    var maxLife = params.maxEnemiesLife;
 
     return Math.floor(Math.random() * (maxLife - minLife)) + minLife;
 }

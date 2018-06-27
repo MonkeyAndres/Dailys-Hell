@@ -12,10 +12,10 @@ function Fireball (game, x, y, direction) {
     this.height = this.radius*2;
     this.direction = direction;
 
-    this.up = -80;
-    this.left = -80;
-    this.right = 80;
-    this.down = 80;
+    this.up = -100;
+    this.left = -100;
+    this.right = 100;
+    this.down = 100;
 
     this.setDirection();
 }
