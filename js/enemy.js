@@ -1,7 +1,7 @@
-function Enemy(game){
+function Enemy(game, life){
     this.game = game;
     this.week = this.game.level;
-    this.life = 10;
+    this.life = life;
 
     this.x = Math.floor(Math.random() * ((window.innerWidth-200) - 200)) + 200;
     this.y = 100;

@@ -5,16 +5,17 @@ function Fireball (game, x, y, direction) {
     this.y = y;
     this.sX = 0;
     this.sY = 0;
+    this.spinSpeed = 1;
 
-    this.radius = 8;
+    this.radius = 7;
     this.width = this.radius*2;
     this.height = this.radius*2;
     this.direction = direction;
 
-    this.up = -150;
-    this.left = -150;
-    this.right = 150;
-    this.down = 150;
+    this.up = -80;
+    this.left = -80;
+    this.right = 80;
+    this.down = 80;
 
     this.setDirection();
 }
@@ -59,8 +60,41 @@ Fireball.prototype.draw = function(color) {
 }
 
 Fireball.prototype.move = function(delta) {
+    this.spinMe();
     this.x += this.sX * delta/1000;
     this.y += this.sY * delta/1000;
+}
+
+Fireball.prototype.spinMe = function() {
+    switch(this.direction){
+        case "up":
+            this.sX += this.spinSpeed;
+            break;
+        case "up-right":
+            this.sY += this.spinSpeed;
+            this.sX += this.spinSpeed;
+            break;
+        case "right":
+            this.sY += this.spinSpeed;
+            break;
+        case "down-right":
+            this.sY += this.spinSpeed;
+            this.sX -= this.spinSpeed;
+            break;
+        case "down":
+            this.sX -= this.spinSpeed;
+            break;
+        case "down-left":
+            this.sY -= this.spinSpeed;
+            this.sX -= this.spinSpeed;
+            break;
+        case "left":
+            this.sY -= this.spinSpeed;
+            break;
+        case "up-left":
+            this.sY -= this.spinSpeed;
+            this.sX += this.spinSpeed;
+    }
 }
 
 Fireball.prototype.checkOutRange = function() {

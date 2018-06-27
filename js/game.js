@@ -3,9 +3,18 @@ function Game(canvas){
     this.ctx = this.canvas.getContext("2d");
     
     this.levels = levels;
+    this.difficulty = 1;
 
     this.startStatus();
 }
+
+/**
+ * TODO
+ * Edit levels, add diferent lifes
+ * Different difficulties?
+ * Music and Fancy stuff
+ * Game over fix?
+ */
 
 Game.prototype.update = function(time) {
     if(this.pause == false){
@@ -18,6 +27,8 @@ Game.prototype.update = function(time) {
         this.moveAll();
         
         this.clearEnemies();
+
+        this.printStatus();
     }
 }
 
@@ -25,6 +36,7 @@ Game.prototype.startStatus = function() {
     this.prevTime = 0;
     this.player = new Player(this);
     this.enemies = [];
+    this.enemyCounter = 0;
     this.level = 0;
     this.pause = true;
     
@@ -53,18 +65,37 @@ Game.prototype.moveAll = function() {
 
 Game.prototype.createEnemies = function(n) {
     for(var i = 0; i < n; i++){
-        this.enemies.push(new Enemy(this));
+        var life = getEnemyLife(this.difficulty);
+        this.enemies.push(new Enemy(this, life));
+        this.enemyCounter++;
     }
 }
 
 Game.prototype.clearEnemies = function() {
-    if(this.pause == true) return;
+    //if(this.pause == true) return;
     for(var i = 0; i < this.enemies.length; i++){
         if(this.enemies[i].pulseArr.length == 0 && this.enemies[i].life == 0){
             this.enemies.splice(i, 1);
         }
     }
-    if(this.enemies.length == 0) this.nextLevel();
+
+    if(this.enemies.length == 1 && this.enemies[0].life == 0) {
+        this.player.stopPulse(); // Stop Player pulse
+        this.enemyCounter = 0;
+    };
+    if(this.enemies.length == 0) this.nextLevel(); // Change Level
+}
+
+Game.prototype.printStatus = function() {
+    var lifeStatus = "Life = "+this.player.life;
+    this.ctx.fillStyle = "white";
+    this.ctx.font = "30px Arial";
+    this.ctx.textAlign = "right";
+
+    this.ctx.fillText(lifeStatus, this.canvas.width-10, 40);
+
+    var lifeStatus = "Enemies = "+this.enemyCounter;
+    this.ctx.fillText(lifeStatus, this.canvas.width-10, 80);
 }
 
 Game.prototype.nextLevel = function() {
@@ -80,6 +111,10 @@ Game.prototype.setLevel = function() {
     
     this.printText(level.title);
     this.createEnemies(level.enemies);
+    
+    var playerLife = difficultyLevels[this.difficulty].playerLife;
+    this.player = new Player(this, playerLife);
+    
 
     setTimeout(() => {this.pause = false}, 2000);
 }
@@ -96,8 +131,7 @@ Game.prototype.printText = function(text, subtext) {
     }
 }
 
-Game.prototype.gameOver = function() {  
-    // Removed for SandBox Mode  
+Game.prototype.gameOver = function() { 
     this.pause = true;
     this.clear();
     this.enemies = [];
