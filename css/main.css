@@ -1,9 +1,17 @@
+@font-face{
+    font-family: 'Arcade Font';
+    src: url(arcade-font.ttf);
+}
+
 * {
     border: 0;
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: 'Arcade Font';
 }
+
+h1{font-size: 80px}
 
 html {
     overflow: hidden;

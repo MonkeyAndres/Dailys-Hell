@@ -67,15 +67,16 @@ Game.prototype.createEnemies = function(n) {
     for(var i = 0; i < n; i++){
         var life = getEnemyLife(this.difficulty);
         this.enemies.push(new Enemy(this, life));
-        this.enemyCounter++;
     }
+    this.enemyCounter = n;
 }
 
 Game.prototype.clearEnemies = function() {
-    //if(this.pause == true) return;
+    if(this.pause == true) return;
     for(var i = 0; i < this.enemies.length; i++){
         if(this.enemies[i].pulseArr.length == 0 && this.enemies[i].life == 0){
             this.enemies.splice(i, 1);
+            this.enemyCounter--;
         }
     }
 
@@ -89,7 +90,7 @@ Game.prototype.clearEnemies = function() {
 Game.prototype.printStatus = function() {
     var lifeStatus = "Life = "+this.player.life;
     this.ctx.fillStyle = "white";
-    this.ctx.font = "30px Arial";
+    this.ctx.font = "30px Arcade Font";
     this.ctx.textAlign = "right";
 
     this.ctx.fillText(lifeStatus, this.canvas.width-10, 40);
@@ -121,12 +122,12 @@ Game.prototype.setLevel = function() {
 
 Game.prototype.printText = function(text, subtext) {
     this.ctx.fillStyle = "white";
-    this.ctx.font = "70px Arial";
+    this.ctx.font = "70px Arcade Font";
     this.ctx.textAlign = "center";
     this.ctx.fillText(text, this.canvas.width/2, this.canvas.height/2);
 
     if(subtext){
-        this.ctx.font = "50px Arial";
+        this.ctx.font = "30px Arcade Font";
         this.ctx.fillText(subtext, this.canvas.width/2, this.canvas.height/2 + 70);
     }
 }
