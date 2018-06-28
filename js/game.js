@@ -35,7 +35,7 @@ Game.prototype.startStatus = function() {
     this.player = new Player(this);
     this.enemies = [];
     this.enemyCounter = 0;
-    this.level = 9;
+    this.level = 0;
     this.pause = true;
     
     // this.setLevel(this.level);
