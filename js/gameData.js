@@ -25,7 +25,7 @@ var enemies = [
     ["bootstrap.png", "jquery.png", "sass.png", "flappy.png"],
     ["codewars.png"],
     ["node.png", "mongo.png", "express.png", "es6.png"],
-    ["passport.png", "googlemaps.png", "ajax.png", "nodemailer.png", "heroku.png"],
+    ["passport.png", "googlemaps.png", "ajax.png", "nodemailer.png", "heroku.png"], // Bug
     ["codewars.png", "lodash.png", "git.png"],
     ["typescript.png", "angular.png", "apirest.png"],
     ["codewars.png", "trello.png"],
