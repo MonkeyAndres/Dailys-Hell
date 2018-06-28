@@ -29,30 +29,16 @@ Enemy.prototype.getRandomSpeed = function() {
 }
 
 Enemy.prototype.getRandomEnemy = function(){
-    var enemies = [
-        ["rover.png", "npm.png"],
-        ["html.png", "css.png", "js.png"],
-        ["bootstrap.png", "jquery.png", "sass.png", "flappy.png"],
-        ["codewars.png"],
-        ["node.png", "mongo.png", "express.png", "es6.png"],
-        ["passport.png", "googlemaps.png", "ajax.png", "nodemailer.png", "heroku.png"],
-        ["codewars.png", "lodash.png", "git.png"],
-        ["typescript.png", "angular.png", "apirest.png"],
-        ["codewars.png", "trello.png"],
-        ["gabi.png", "beltran.png", "juan.png", "susana.png"]
-    ]
+    var enemiesArr = enemies;
 
-    var randomEnemy = Math.floor(Math.random() * (enemies[this.week].length));
-    return enemies[this.week][randomEnemy];
+    var randomEnemy = Math.floor(Math.random() * (enemiesArr[this.week].length));
+    return enemiesArr[this.week][randomEnemy];
 }
 
 Enemy.prototype.draw = function() {
+    for(p of this.pulseArr){p.draw()}
     this.game.ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     this.drawLifeIndicator();
-
-    for(p of this.pulseArr){
-        p.draw();
-    }
 }
 
 Enemy.prototype.drawLifeIndicator = function() {
@@ -78,9 +64,13 @@ Enemy.prototype.move = function(delta) {
 
 Enemy.prototype.bounceInLimits = function() {
     if(this.x < 0 || this.x + this.width > window.innerWidth){
+        if(this.x < 0) this.x = 10
+        else if(this.y + this.width > window.innerWidth) this.y = window.innerWidth-this.width;
         this.speedX = -this.speedX;
     }
     if(this.y < 0 || this.y + this.height > window.innerHeight){
+        if(this.y < 0) this.y = 0;
+        else if(this.y + this.height > window.innerHeight) this.y = window.innerHeight-this.height;
         this.speedY = -this.speedY;
     }
 }
@@ -89,7 +79,7 @@ Enemy.prototype.createPulse = function() {
     var pulseX = this.x+(this.width/2) - 10;
     var pulseY = this.y+(this.height/2) + 10;
     
-    var pulse = new Pulse(this.game, pulseX, pulseY, "enemy");
+    var pulse = new Pulse(this.game, pulseX, pulseY, "enemy", this.game.mlgMode);
     this.pulseArr.push(pulse);
 }
 

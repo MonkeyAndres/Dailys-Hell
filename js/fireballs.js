@@ -1,4 +1,4 @@
-function Fireball (game, x, y, direction) {
+function Fireball (game, x, y, direction, mlg) {
     this.game = game;
     
     this.x = x;
@@ -17,7 +17,16 @@ function Fireball (game, x, y, direction) {
     this.right = 100;
     this.down = 100;
 
+    this.mlg = mlg;
+    this.setMlgImg();
+
     this.setDirection();
+}
+
+Fireball.prototype.setMlgImg = function() {
+    this.mlgImg = new Image();
+    this.mlgImg.src = "images/mlgObjects/" + this.randomMlgObject();
+    this.mlgImg.onload = () => this.mlgHeight = (this.width*3 / this.mlgImg.width) * this.mlgImg.height;
 }
 
 Fireball.prototype.setDirection = function() {
@@ -53,10 +62,23 @@ Fireball.prototype.setDirection = function() {
 }
 
 Fireball.prototype.draw = function(color) {
-    this.game.ctx.beginPath();
-    this.game.ctx.fillStyle = color;
-    this.game.ctx.arc(this.x + this.radius, this.y - this.radius, this.radius, 0, Math.PI*2);
-    this.game.ctx.fill();
+    if(this.mlg){
+        this.mlgMode(color);
+    } else {
+        this.game.ctx.beginPath();
+        this.game.ctx.fillStyle = color;
+        this.game.ctx.arc(this.x + this.radius, this.y - this.radius, this.radius, 0, Math.PI*2);
+        this.game.ctx.fill();
+    }
+}
+
+Fireball.prototype.mlgMode = function(mode) {
+    this.game.ctx.drawImage(this.mlgImg, this.x, this.y, this.width*3, this.mlgHeight);
+}
+
+Fireball.prototype.randomMlgObject = function() {
+    var randObject = Math.floor(Math.random() * (mlgObjects.length));
+    return mlgObjects[randObject];
 }
 
 Fireball.prototype.move = function(delta) {

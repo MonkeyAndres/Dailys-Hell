@@ -1,7 +1,8 @@
-function Game(canvas, difficulty){
+function Game(canvas, difficulty, mlg){
     this.canvas = canvas;
     this.ctx = this.canvas.getContext("2d");
     
+    this.mlgMode = mlg;
     this.levels = levels;
     this.difficultyParams = difficultyLevels[difficulty];
 
@@ -10,7 +11,6 @@ function Game(canvas, difficulty){
 
 /**
  * TODO
- * Difficulties Speed Pulse
  * Music and Fancy stuff
  */
 
@@ -63,18 +63,18 @@ Game.prototype.moveAll = function() {
 
 Game.prototype.createEnemies = function(n) {
     for(var i = 0; i < n; i++){
-        var life = this.setEnemyLife();
+        var life = this.difficultyParams.enemiesLife;
         this.enemies.push(new Enemy(this, life));
     }
     this.enemyCounter = n;
 }
 
-Game.prototype.setEnemyLife = function() {
-    var minLife = this.difficultyParams.minEnemiesLife;
-    var maxLife = this.difficultyParams.maxEnemiesLife;
+// Game.prototype.setEnemyLife = function() {
+//     var minLife = this.difficultyParams.minEnemiesLife;
+//     var maxLife = this.difficultyParams.maxEnemiesLife;
 
-    return Math.floor(Math.random() * (maxLife - minLife)) + minLife;
-}
+//     return Math.floor(Math.random() * (maxLife - minLife)) + minLife;
+// }
 
 Game.prototype.clearEnemies = function() {
     if(this.pause == true) return;
@@ -102,6 +102,9 @@ Game.prototype.printStatus = function() {
 
     var lifeStatus = "Enemies = "+this.enemyCounter;
     this.ctx.fillText(lifeStatus, this.canvas.width-10, 80);
+
+    var lifeStatus = "Week = "+this.level + "/10";
+    this.ctx.fillText(lifeStatus, this.canvas.width-10, 120);
 }
 
 Game.prototype.nextLevel = function() {
@@ -109,7 +112,18 @@ Game.prototype.nextLevel = function() {
     this.clear();
 
     this.level++;
-    this.setLevel();
+
+    if(this.level == 10) this.summonMarc(); // Final Boss
+    else this.setLevel(); // Set level
+}
+
+Game.prototype.summonMarc = function() {
+    this.printText("> Marc joined the game", "Marc deleted the code of 'yourbullets.js'");
+    this.enemies.push(new FinalBoss(this));
+    this.player = new Player(this, 30);
+    clearInterval(this.player.interval);
+    
+    setTimeout(() => {this.pause = false}, 5000);
 }
 
 Game.prototype.setLevel = function() {
@@ -124,11 +138,11 @@ Game.prototype.setLevel = function() {
     
     if(this.difficultyParams.noHeal && this.level != 0){ // No Heal Mode
         playerLife = this.player.life;
-    } 
+    }
+
     this.player = new Player(this, playerLife); 
     
-
-    setTimeout(() => {this.pause = false}, 2000);
+    setTimeout(() => {this.pause = false}, 2000); // Wait 2secs and resume the game
 }
 
 Game.prototype.printText = function(text, subtext) {

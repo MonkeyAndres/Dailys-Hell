@@ -23,13 +23,9 @@ function Player(game, life) {
 }
 
 Player.prototype.draw = function() {
+  for(p of this.pulseArr){p.draw()}
   this.game.ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-  
   this.drawLifeIndicator();
-
-  for(p of this.pulseArr){
-    p.draw();
-  }
 };
 
 Player.prototype.drawLifeIndicator = function() {
@@ -94,7 +90,7 @@ Player.prototype.pulseAttack = function() {
   var pulseX = this.x+(this.width/2) - 10;
   var pulseY = this.y+(this.height/2) + 10;
 
-  var pulse = new Pulse(this.game, pulseX, pulseY, "player");
+  var pulse = new Pulse(this.game, pulseX, pulseY, "player", this.game.mlgMode);
   this.pulseArr.push(pulse);
 }
 

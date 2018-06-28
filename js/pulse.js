@@ -1,4 +1,4 @@
-function Pulse(game, x, y, origin) {
+function Pulse(game, x, y, origin, mlg) {
     this.game = game
     
     this.x = x;
@@ -6,6 +6,7 @@ function Pulse(game, x, y, origin) {
     this.prevTime = 0;
 
     this.origin = origin;
+    this.mlg = mlg;
     this.fireballs = [];
 
     this.generateFireballs();
@@ -15,7 +16,7 @@ function Pulse(game, x, y, origin) {
 Pulse.prototype.setColor = function() {
     if(this.origin == "player"){
         this.color = "red";
-    } else {
+    } else if (this.origin == "enemy"){
         this.color = "blue";
     }
 }
@@ -23,7 +24,7 @@ Pulse.prototype.setColor = function() {
 Pulse.prototype.generateFireballs = function() {
     var directions = ["up", "up-right", "right", "down-right", "down", "down-left", "left", "up-left"]
     for(d of directions){
-        var fireball = new Fireball(this.game, this.x, this.y, d);
+        var fireball = new Fireball(this.game, this.x, this.y, d, this.mlg);
         this.fireballs.push(fireball);
     }
 }

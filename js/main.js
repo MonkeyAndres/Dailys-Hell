@@ -14,7 +14,7 @@ function startGame(event){
     splashScreen.style.display = "none";
 
     game = new Game(canvas, difficulty);
-    window.requestAnimationFrame(updateGame)
+    window.requestAnimationFrame(updateGame);
 }
 
 function updateGame(time){
