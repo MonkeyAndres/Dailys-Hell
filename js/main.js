@@ -31,6 +31,10 @@ window.onload = (event) => {
     var difficulties = document.getElementsByTagName('article');
     var difficultiesArr = [].slice.call(difficulties);
 
+    var audio = new Audio('sounds/level1.mp3');
+    audio.loop = true;
+    audio.play();
+
     canvas.width  = window.innerWidth;
     canvas.height = window.innerHeight;
 

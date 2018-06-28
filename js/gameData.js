@@ -33,3 +33,12 @@ var enemies = [
 ]
 
 var mlgObjects = ['dorito.png', 'mtndew.png', 'obeycap.png', 'glasses.png', 'illuminati.png', 'airhorn.png', 'doge.png'];
+
+var soundPath = "./sounds/";
+var sounds = [
+    {id: "gameMenu", src: "titleScreen.mp3"},
+    {id: "level1", src: "level1.mp3"},
+    {id: "level2", src: "level2.mp3"},
+    {id: "level3", src: "level3.mp3"},
+    {id: "ending", src: "ending.mp3"}
+]
