@@ -63,10 +63,17 @@ Game.prototype.moveAll = function() {
 
 Game.prototype.createEnemies = function(n) {
     for(var i = 0; i < n; i++){
-        var life = getEnemyLife(this.difficultyParams);
+        var life = this.setEnemyLife();
         this.enemies.push(new Enemy(this, life));
     }
     this.enemyCounter = n;
+}
+
+Game.prototype.setEnemyLife = function() {
+    var minLife = this.difficultyParams.minEnemiesLife;
+    var maxLife = this.difficultyParams.maxEnemiesLife;
+
+    return Math.floor(Math.random() * (maxLife - minLife)) + minLife;
 }
 
 Game.prototype.clearEnemies = function() {

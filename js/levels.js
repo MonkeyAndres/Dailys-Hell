@@ -20,8 +20,4 @@ var difficultyLevels = [
 ]
 
 function getEnemyLife(params) {
-    var minLife = params.minEnemiesLife;
-    var maxLife = params.maxEnemiesLife;
-
-    return Math.floor(Math.random() * (maxLife - minLife)) + minLife;
 }

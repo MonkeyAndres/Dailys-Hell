@@ -20,6 +20,8 @@ function Enemy(game, life){
 
     this.pulseTiming = 700;
     this.interval = setInterval(this.createPulse.bind(this), this.pulseTiming);
+
+    console.log(this);
 }
 
 Enemy.prototype.getRandomSpeed = function() {
