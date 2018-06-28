@@ -35,10 +35,11 @@ Game.prototype.startStatus = function() {
     this.player = new Player(this);
     this.enemies = [];
     this.enemyCounter = 0;
-    this.level = 0;
+    this.level = 9;
     this.pause = true;
     
-    this.setLevel(this.level);
+    // this.setLevel(this.level);
+    this.nextLevel();
 }
 
 Game.prototype.clear = function() {
@@ -153,7 +154,7 @@ Game.prototype.printText = function(text, subtext) {
 
     if(subtext){
         this.ctx.font = "30px Arcade Font";
-        this.ctx.fillText(subtext, this.canvas.width/2, this.canvas.height/2 + 70);
+        this.ctx.fillText(subtext, this.canvas.width/2, this.canvas.height/2 + 50);
     }
 }
 
@@ -166,10 +167,13 @@ Game.prototype.setEnemyShootingSpeed = function() {
 Game.prototype.gameOver = function() { 
     this.pause = true;
     this.clear();
-    this.enemies = [];
+    
+    if(this.level == 10) this.printText("GAME OVER", "You thought you can beat Marc?");
+    else this.printText("GAME OVER", "Press Enter to Restart");
+    
     this.level = 0;
+    this.enemies = [];
 
-    this.printText("GAME OVER", "Press Enter to Restart");
     this.addResetEvent();
 }
 
