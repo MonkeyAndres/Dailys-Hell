@@ -85,11 +85,19 @@ Game.prototype.clearEnemies = function() {
         }
     }
 
-    if(this.enemies.length == 1 && this.enemies[0].life == 0) {
+    if(this.enemies.length == 1 && this.allEnemiesDead()) {
         this.player.stopPulse(); // Stop Player pulse
         this.enemyCounter = 0;
     };
     if(this.enemies.length == 0) this.nextLevel(); // Change Level
+}
+
+Game.prototype.allEnemiesDead = function() {
+    var anybodyAlive = false;
+    for(e of this.enemies){
+        if(e.life > 0) anybodyAlive = true;
+    }
+    return anybodyAlive;
 }
 
 Game.prototype.printStatus = function() {

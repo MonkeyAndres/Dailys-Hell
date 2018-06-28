@@ -76,6 +76,7 @@ Enemy.prototype.bounceInLimits = function() {
 }
 
 Enemy.prototype.createPulse = function() {
+    if(this.game.pause) {return;}
     var pulseX = this.x+(this.width/2) - 10;
     var pulseY = this.y+(this.height/2) + 10;
     
