@@ -38,8 +38,7 @@ Game.prototype.startStatus = function() {
     this.level = 0;
     this.pause = true;
     
-    // this.setLevel(this.level);
-    this.nextLevel();
+    this.setLevel(this.level);
 }
 
 Game.prototype.clear = function() {
