@@ -11,7 +11,6 @@ function Game(canvas, difficulty){
 /**
  * TODO
  * Difficulties Speed Pulse
- * Enemies life indicator
  * Music and Fancy stuff
  */
 
@@ -112,6 +111,8 @@ Game.prototype.setLevel = function() {
     this.printText(level.title);
     this.createEnemies(level.enemies);
 
+    this.setEnemyShootingSpeed();
+
     var playerLife = this.difficultyParams.playerLife; // Get life
     
     if(this.difficultyParams.noHeal && this.level != 0){ // No Heal Mode
@@ -132,6 +133,12 @@ Game.prototype.printText = function(text, subtext) {
     if(subtext){
         this.ctx.font = "30px Arcade Font";
         this.ctx.fillText(subtext, this.canvas.width/2, this.canvas.height/2 + 70);
+    }
+}
+
+Game.prototype.setEnemyShootingSpeed = function() {
+    for(enemy of this.enemies){
+        enemy.pulseTiming = this.difficultyParams.enemyShootingSpeed;
     }
 }
 

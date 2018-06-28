@@ -12,11 +12,11 @@ var levels = [
 ]
 
 var difficultyLevels = [
-    {'minEnemiesLife': 5, 'maxEnemiesLife': 10, 'playerLife': 50}, // Hard 
-    {'minEnemiesLife': 10, 'maxEnemiesLife': 15, 'playerLife': 20}, // Very Hard
-    {'minEnemiesLife': 15, 'maxEnemiesLife': 20, 'playerLife': 20}, // 1vs1
-    {'minEnemiesLife': 15, 'maxEnemiesLife': 20, 'playerLife': 20, 'noHeal': true}, // Hardcore
-    {'minEnemiesLife': 10, 'maxEnemiesLife': 20, 'playerLife': 99999}, // God
+    {'minEnemiesLife': 5, 'maxEnemiesLife': 10, 'playerLife': 50, 'enemyShootingSpeed': 700}, // Hard 
+    {'minEnemiesLife': 10, 'maxEnemiesLife': 15, 'playerLife': 20,'enemyShootingSpeed': 500}, // Very Hard
+    {'minEnemiesLife': 15, 'maxEnemiesLife': 20, 'playerLife': 20, 'enemyShootingSpeed': 300}, // 1vs1
+    {'minEnemiesLife': 15, 'maxEnemiesLife': 20, 'playerLife': 20, 'noHeal': true, 'enemyShootingSpeed': 300}, // Hardcore
+    {'minEnemiesLife': 10, 'maxEnemiesLife': 20, 'playerLife': 99999, 'enemyShootingSpeed': 400}, // God
 ]
 
 function getEnemyLife(params) {

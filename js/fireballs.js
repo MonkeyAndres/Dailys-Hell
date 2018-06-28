@@ -5,7 +5,7 @@ function Fireball (game, x, y, direction) {
     this.y = y;
     this.sX = 0;
     this.sY = 0;
-    this.spinSpeed = 1;
+    this.spinSpeed = 2.5;
 
     this.radius = 7;
     this.width = this.radius*2;

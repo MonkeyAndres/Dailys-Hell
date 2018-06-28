@@ -1,6 +1,8 @@
 function Enemy(game, life){
     this.game = game;
     this.week = this.game.level;
+    
+    this.initialLife = life;
     this.life = life;
 
     this.x = Math.floor(Math.random() * ((window.innerWidth-200) - 200)) + 200;
@@ -44,9 +46,19 @@ Enemy.prototype.getRandomEnemy = function(){
 
 Enemy.prototype.draw = function() {
     this.game.ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-    
+    this.drawLifeIndicator();
+
     for(p of this.pulseArr){
         p.draw();
+    }
+}
+
+Enemy.prototype.drawLifeIndicator = function() {
+    if(this.life > 0){
+        var percentageOfLife = Math.floor(50*this.life)/this.initialLife;
+        this.game.ctx.fillStyle = "green";
+        this.game.ctx.strokeRect(this.x, this.y - 15, this.width, 10);
+        this.game.ctx.fillRect(this.x, this.y - 15, percentageOfLife, 10);
     }
 }
 

@@ -1,5 +1,6 @@
 function Player(game, life) {
   this.game = game;
+  this.initialLife = life;
   this.life = life;
 
   this.width = 50;
@@ -23,10 +24,22 @@ function Player(game, life) {
 
 Player.prototype.draw = function() {
   this.game.ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+  
+  this.drawLifeIndicator();
+
   for(p of this.pulseArr){
     p.draw();
   }
 };
+
+Player.prototype.drawLifeIndicator = function() {
+  if(this.life > 0){
+    var percentageOfLife = Math.floor(50*this.life)/this.initialLife;
+    this.game.ctx.fillStyle = "green";
+    this.game.ctx.strokeRect(this.x, this.y - 15, this.width, 10);
+    this.game.ctx.fillRect(this.x, this.y - 15, percentageOfLife, 10);
+  }
+}
 
 Player.prototype.move = function() {
   this.x += this.sX * this.game.delta/1000;
