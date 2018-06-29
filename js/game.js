@@ -88,6 +88,7 @@ Game.prototype.clearEnemies = function() {
     if(this.enemies.length == 1 && !this.anybodyAlive()) {
         this.player.stopPulse(); // Stop Player pulse
         this.enemyCounter = 0;
+        // this.enemies.splice(0, 1);
     };
     if(this.enemies.length == 0) this.nextLevel(); // Change Level
 }

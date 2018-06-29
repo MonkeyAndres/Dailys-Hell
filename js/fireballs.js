@@ -143,7 +143,7 @@ Fireball.prototype.checkCollisionsEnemies = function(){
         if (this.x < enemies[i].x + enemies[i].width && this.x + this.width > enemies[i].x &&
             this.y < enemies[i].y + enemies[i].height && this.height + this.y > enemies[i].y) {
             
-            if(enemies[i].life == 0){
+            if(enemies[i].life <= 0){
                 clearInterval(enemies[i].interval); // Stop Pulses
                 enemies[i].img.src = ""; // Delete IMG
             } else {
@@ -169,6 +169,6 @@ Fireball.prototype.checkCollisionsPlayer = function(){
 
         this.game.player.life--;
         console.log(this.game.player.life)
-        if(this.game.player.life == 0) this.game.gameOver();
+        if(this.game.player.life <= 0) this.game.gameOver();
     }
 }
