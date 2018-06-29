@@ -66,17 +66,21 @@ Player.prototype.checkLimits = function() {
 }
 
 Player.prototype.makeMove = function(event) {
-  switch (event.code) {
-	  case "ArrowUp":
+  switch (event.key) {
+    case "ArrowUp":
+    case "w":
       this.sY = -200;
       break;
     case "ArrowDown":
+    case "s":
       this.sY = 200;
       break;
     case "ArrowLeft":
+    case "a":
       this.sX = -200;
       break;
     case "ArrowRight":
+    case "d":
       this.sX = 200;
       break;
     // case "Space":
@@ -108,16 +112,20 @@ Player.prototype.stopPulse = function() {
 
 Player.prototype.stopMove = function(event) {
   switch (event.key) {
-	  case "ArrowUp":
+    case "ArrowUp":
+    case "w":
       this.sY = 0;
       break;
     case "ArrowDown":
+    case "s":
       this.sY = 0;
       break;
     case "ArrowLeft":
+    case "a":
       this.sX = 0;
       break;
     case "ArrowRight":
+    case "d":
       this.sX = 0;
       break;
   }
