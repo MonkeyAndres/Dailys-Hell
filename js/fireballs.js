@@ -153,6 +153,11 @@ Fireball.prototype.checkCollisionsEnemies = function(){
             // Delete fireball
             this.x = -10;
             this.y = -10;
+        } else {
+            if(enemies[i].life <= 0){
+                clearInterval(enemies[i].interval); // Stop Pulses
+                enemies[i].img.src = ""; // Delete IMG
+            }
         }
     }     
 }
@@ -168,7 +173,6 @@ Fireball.prototype.checkCollisionsPlayer = function(){
         this.y = -10;
 
         this.game.player.life--;
-        console.log(this.game.player.life)
         if(this.game.player.life <= 0) this.game.gameOver();
     }
 }
