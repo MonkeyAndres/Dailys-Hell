@@ -22,7 +22,7 @@ Este juego fue realizado unicamente en **una semana** y esta basado en el bootca
 * **Pantallas** que indican el **paso de nivel** y curan a tu jugador principal. Aparte de pantalla de Game Over y selector de dificultades.
 * Tiene un **jefe final** como ultimo nivel
 * Imagenes **comprimidas** para mas rendimiento
-* [Easter Egg](#EasterEgg)
+* [Easter Egg](#easteregg)
 
 ### Dificultades 
 Como añadido tienes varias dificultades para pasarte el juego: 
