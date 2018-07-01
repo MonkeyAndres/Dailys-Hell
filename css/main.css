@@ -82,3 +82,16 @@ html {
 #difficulty-container article p{
     color: #BDBDBD;
 }
+
+#gameStory{
+    color: #1DE9B6;
+    position: absolute;
+    top: 1em;
+    left: 1em;
+    z-index: 999;
+}
+
+#disableParticles{
+    color: #1DE9B6;
+    margin-top: 1em;
+}

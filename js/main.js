@@ -8,6 +8,16 @@ function initParticles() {
     });
 }
 
+function toggleParticles() {
+    var particlesActive = pJSDom[0].pJS.particles.move.enable
+    if(particlesActive){
+        pJSDom[0].pJS.particles.move.enable = false;
+    } else {
+        pJSDom[0].pJS.particles.move.enable = true;
+        pJSDom[0].pJS.fn.particlesRefresh();
+    }
+}
+
 function startGame(event){
     var difficulty = event.currentTarget.id;
 
@@ -31,6 +41,8 @@ window.onload = (event) => {
     var difficulties = document.getElementsByTagName('article');
     var difficultiesArr = [].slice.call(difficulties);
 
+    var disableParticles = document.getElementById("disableParticles");
+
     // var audio = new Audio('sounds/level1.mp3');
     // audio.loop = true;
     // audio.play();
@@ -39,6 +51,11 @@ window.onload = (event) => {
     canvas.height = window.innerHeight;
 
     initParticles();
+
+    disableParticles.addEventListener('click', function(event) {
+        event.preventDefault();
+        toggleParticles();
+    })
 
     window.addEventListener('keydown', (event) => {
         if(event.code == "Space") {
