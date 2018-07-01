@@ -4,7 +4,7 @@
 
 Este juego fue realizado unicamente en **una semana** y esta basado en el bootcamp de **Desarrollo Web** de **IronHack**, el cual esta dividido en 9 semanas y un prework. La idea de este juego se me ocurrio porque queria hacer una experiencia jugable de como se siente hacer el bootcamp de Desarrollo Web de IronHack.
 
-![Game Prewiew](/home/monkeyandres/Projects/Dailys Hell/images/gamePreview.png)
+![Game Prewiew](images/gamePreview.png)
 
 ### Features
 
@@ -27,7 +27,7 @@ Este juego fue realizado unicamente en **una semana** y esta basado en el bootca
 ### Dificultades 
 Como añadido tienes varias dificultades para pasarte el juego: 
 
-![](/home/monkeyandres/Projects/Dailys Hell/images/difficultySelector.png)
+![Difficulty Selector](images/difficultySelector.png)
 
 Cada una de estas dificultades **cambia** ciertos **parametros** del juego como la **vida** de los enemigos, del personaje principal y la **velocidad** a la que disparan los enemigos o incluso si al pasar de nivel tu personaje se **cura** o no.
 
@@ -52,4 +52,4 @@ Una vez seleccionada la dificultad del juego y con el juego iniciado puedes dent
 game.mlgMode = true
 ```
 
-![](/home/monkeyandres/Projects/Dailys Hell/images/easterEgg.png)
+![EasterEgg preview](images/easterEgg.png)
