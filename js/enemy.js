@@ -19,9 +19,7 @@ function Enemy(game, life){
     this.img.onload = () => this.height = (this.width / this.img.width) * this.img.height;
 
     this.pulseTiming = 700;
-    this.interval = setInterval(this.createPulse.bind(this), this.pulseTiming);
-
-    console.log(this);
+    this.interval = setInterval(() => this.createPulse(), this.pulseTiming);
 }
 
 Enemy.prototype.getRandomSpeed = function() {

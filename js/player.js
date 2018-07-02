@@ -15,11 +15,11 @@ function Player(game, life) {
   this.img = new Image();
   this.img.src = "images/player.png";
 
-  this.setListeners(this);
+  this.setListeners();
 
   this.pulseArr = [];
   this.pulseTiming = 300;
-  this.interval = setInterval(this.pulseAttack.bind(this), this.pulseTiming);
+  this.interval = setInterval(() => this.pulseAttack(), this.pulseTiming);
 }
 
 Player.prototype.draw = function() {
@@ -131,12 +131,12 @@ Player.prototype.stopMove = function(event) {
   }
 }
 
-Player.prototype.setListeners = function(that) {
-  window.addEventListener('keydown', function(event){
-    that.makeMove(event);
+Player.prototype.setListeners = function() {
+  window.addEventListener('keydown', (event) => {
+    this.makeMove(event);
   })
 
-  window.addEventListener('keyup', function(){
-    that.stopMove(event);
+  window.addEventListener('keyup', (event) => {
+    this.stopMove(event);
   });
 };

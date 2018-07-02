@@ -52,7 +52,7 @@ window.onload = (event) => {
 
     initParticles();
 
-    disableParticles.addEventListener('click', function(event) {
+    disableParticles.addEventListener('click', (event) => {
         event.preventDefault();
         toggleParticles();
     })

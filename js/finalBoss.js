@@ -16,7 +16,7 @@ function FinalBoss(game) {
 
     this.pulseArr = [];
     this.pulseTiming = 300;
-    this.interval = setInterval(this.shoot.bind(this), this.pulseTiming);
+    this.interval = setInterval(() => this.shoot(), this.pulseTiming);
     console.log(this);
 }
 

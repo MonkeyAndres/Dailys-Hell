@@ -9,11 +9,6 @@ function Game(canvas, difficulty, mlg){
     this.startStatus();
 }
 
-/**
- * TODO
- * Music and Fancy stuff
- */
-
 Game.prototype.update = function(time) {
     if(this.pause == false){
         this.clear();

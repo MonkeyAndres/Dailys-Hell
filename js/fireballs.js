@@ -147,7 +147,7 @@ Fireball.prototype.checkCollisionsEnemies = function(){
                 clearInterval(enemies[i].interval); // Stop Pulses
                 enemies[i].img.src = ""; // Delete IMG
             } else {
-                enemies[i].life--; 
+                enemies[i].life--;
             }
 
             // Delete fireball
